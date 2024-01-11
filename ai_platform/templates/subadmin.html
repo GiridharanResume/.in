@@ -1,0 +1,467 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRISHTEC</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style-admin.css'%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<style>
+    .detail,.detail td,.detail th{
+        border:1px solid black;
+        border-collapse:collapse;
+        padding:8px;
+    }
+    .detail{
+        width:90%;
+       margin-left:30px; 
+        
+    }
+    .detail th{
+        color:green;
+    }
+    .detail tr:nth-child(odd){
+        background-color:#ddd;
+
+    }
+    .detail tr:nth-child(even){
+        background-color:white;
+
+    }
+
+
+@media only screen and (max-width:992px){
+ .detail{
+     position:absolute;
+     width:3%;
+ }   
+    
+}
+
+
+@media screen and (max-width: 600px) {
+  .table {
+    border: 0;
+  }
+
+  .table caption {
+    font-size: 1.3em;
+  }
+  
+  .table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  .table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .table td:last-child {
+    border-bottom: 0;
+  }
+  
+}
+
+.canvasjs-chart-credit{
+    display:none;
+}
+
+
+    /* The Modal (background) */
+    .ebcf_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.ebcf_modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    margin-left:25%;
+}
+
+/* The Close Button */
+.ebcf_close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.ebcf_close:hover,
+.ebcf_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 600px) {
+ .input-group{
+     display:none;
+ }   
+    
+}
+
+nav ul li a {
+	display: block;
+	padding: 10px 15px;
+	color: #333;
+	text-decoration: none;
+	-webkit-transition: 0.2s linear;
+	-moz-transition: 0.2s linear;
+	-ms-transition: 0.2s linear;
+	-o-transition: 0.2s linear;
+	transition: 0.2s linear;
+}
+nav ul li a:hover {
+	background: #f8f8f8;
+	color: #515151;
+}
+nav ul li a .fa {
+	width: 16px;
+	text-align: center;
+	margin-right: 5px;
+	float:right;
+}
+
+
+nav ul li ul li a:hover {
+	background: #e7eaf0;
+	border-left: 4px solid #ddd;
+}
+
+</style>
+
+<body>
+    <!-- Banner -->
+
+
+<!-- Dashboard -->
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Vertical Navbar -->
+    <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Brand -->
+            <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                <img src="{% static '/image/krish logo.PNG'%}" alt="..." style="height:110px;">
+            </a>
+            <!-- User menu (mobile) -->
+            <div class="navbar-user d-lg-none">
+                <!-- Dropdown -->
+                <div class="dropdown">
+                    <!-- Toggle -->
+                    
+                    <!-- Menu -->
+                    
+                </div>
+            </div>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidebarCollapse">
+                <!-- Navigation -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="bi bi-house"></i> Dashboard
+                        </a>
+                    </li>
+                    
+                    <li class='sub-menu' ><a href='#' style="color: #000;font-weight: 500;font-size: .875rem;">&nbsp;&nbsp;<i class="bi bi-bar-chart"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Course List
+                        <span class="arrow" style="font-size: 9px;margin-left: 46%;color:#aaaaaa;">&#9660;</span></a>
+                        <ul>
+                           
+                            <li><a href="{% url 'KTcoursepage' %}">Allowed Course</a></li>
+                            
+                        </ul>
+                    </li>
+                   
+
+
+  
+                   
+                    
+                   
+                     
+                   
+                    <li class='sub-menu' ><a href='#' style="color: #000;font-weight: 500;font-size: .875rem;">&nbsp;&nbsp;<i class="bi bi-person-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Account
+                        <span class="arrow" style="font-size: 9px;margin-left: 40%;color:#aaaaaa;">&#9660;</span></a>
+                        <ul>
+                            <li><a href="{% url 'admin_user' %}">Admin</a></li>
+                            <li><a href="{% url 'subadmin' %}">Staff</a></li>
+                            
+                        </ul>
+                    </li>
+                   
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="bi bi-box-arrow-left"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+                <!-- Divider -->
+                
+                <!-- Push content down -->
+                
+        </div>
+    </nav>
+
+    <div class="msb" id="msb">
+	
+</div>
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Staff Account</h1>
+                        </div>
+                        <!-- Actions -->
+                        
+                    </div>
+                    <!-- Nav -->
+                    <ul class="navbar-nav mr-lg-4 w-50">
+          <li class="nav-item nav-search d-none d-lg-block w-50">
+            <div class="input-group" style="margin-left: 74%;width:25%;">
+             
+              
+              <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search" id='search-box'>
+            </div>
+          </li>
+        </ul>
+        
+       <br>
+                </div>
+            </div>
+        </header>
+
+        <br><br>
+        <button  class="btn btn-info" id="mySizeChart" style="margin-right:4%;float:right;">&nbsp;+ Add Admin</button>
+
+
+
+<div id="mySizeChartModal" class="ebcf_modal">
+
+  <div class="ebcf_modal-content">
+    <span class="ebcf_close">&times;</span>
+    
+ 
+    <form action="" method="post">
+        {% csrf_token %}
+  <div class="form-group">
+    
+						<label for="name">Name :</label>
+						<input type="text" name="name" id="name" placeholder="Enter Full Name"  class="form-control" required class="form-control" />
+						
+					</div>
+					
+					<div class="form-group">
+						<label for="name">Email :</label>
+						<input type="text" name="email" id="email" placeholder="Enter Your Email" class="form-control" required class="form-control"/>
+						
+					</div>
+
+				
+
+					<div class="form-group">
+						<label for="name">Password :</label>
+						<input type="password" name="password" id="password" placeholder="Enter Your Password"  class="form-control" required class="form-control"/>
+		
+					</div>
+          
+          
+
+
+
+
+					<input type="checkbox" onclick="myFunction()" style="margin-left:85%;"> &nbsp;<b>Show Password</b>
+					<br>
+ <div class="form-group">
+						<input type="submit" name="subadmin" value="Submit" class="btn btn-primary" />
+					</div>
+  
+</form>
+ </div>
+
+</div>
+
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+           
+                   
+
+
+            <br>
+<br>
+
+            <table class="table table-bordered" id="example"  style="width:93%;margin-left:40px;">
+              <thead >
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">USERNAME</th>
+                  <th scope="col">EMAIL</th>
+                    <th scope="col">PASSWORD</th>
+                    <th scope ="col">ACTION</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {%  for x in sub_admin %}   
+               <tr>
+                <th>{{ forloop.counter }}</th>
+                <th>{{ x.name }}</th>
+                <th>{{ x.email }}</th>
+                <th>{{ x.password }}</th>
+                <th>
+                  <a href="{% url 'Editsubadmin' %}" class="btn btn-primary">
+    Edit
+    </a>
+                
+    <a onclick="delete_topic('{{x.Topic_id}}')" class="btn btn-danger" data-toggle="modal"  >
+    Delete
+    </a>
+    </th>
+    
+    
+    
+               </tr>
+               {% endfor %}
+               </tbody>
+            </table>
+
+
+
+            
+                    </main>
+                    
+                </div>
+            </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script>
+    // Get the modal
+var ebModal = document.getElementById('mySizeChartModal');
+
+// Get the button that opens the modal
+var ebBtn = document.getElementById("mySizeChart");
+
+// Get the <span> element that closes the modal
+var ebSpan = document.getElementsByClassName("ebcf_close")[0];
+
+// When the user clicks the button, open the modal 
+ebBtn.onclick = function() {
+  ebModal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+ebSpan.onclick = function() {
+  ebModal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == ebModal) {
+      ebModal.style.display = "none";
+  }
+}
+</script>
+ <script>
+     (function(){
+  $('#msbo').on('click', function(){
+    $('body').toggleClass('msb-x');
+  });
+}());
+ </script>
+ 
+  <script>
+      (function () {
+    var showResults;
+    $('#search-box').keyup(function () {
+        var searchText;
+        searchText = $('#search-box').val();
+        return showResults(searchText);
+    });
+    showResults = function (searchText) {
+        $('text').hide();
+        return $('text:Contains(' + searchText + ')').show();
+    };
+    jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function (arg) {
+        return function (elem) {
+            return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+}.call(this));
+  </script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+     <script>
+        $('.sub-menu ul').hide();
+    $(".sub-menu a").click(function () {
+        $(this).parent(".sub-menu").children("ul").slideToggle("100");
+        $(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
+    });
+      </script>
+</body>
+</html>

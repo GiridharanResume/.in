@@ -1,0 +1,579 @@
+{% load static %}
+<!Doctype html>
+
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KRISHTEC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style-admin.css'%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+      <style>
+      
+     
+      
+     
+    .detail,.detail td,.detail th{
+        border:1px solid black;
+        border-collapse:collapse;
+        padding:8px;
+    }
+    .detail{
+        width:90%;
+       margin-left:30px; 
+        
+    }
+    .detail th{
+        color:green;
+    }
+    .detail tr:nth-child(odd){
+        background-color:#ddd;
+
+    }
+    .detail tr:nth-child(even){
+        background-color:white;
+
+    }
+
+
+
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+.tabs {
+  text-align: center;
+  padding: 1.4rem;
+}
+
+ul.tabs li {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  /*padding: .8rem 2.4rem;
+  background:#eee;*/
+  cursor: pointer;
+  margin: 0 1.1rem;
+}
+
+.tabs li:after {
+  position: absolute;
+  content: "";
+  display: table;
+  clear: both;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #45c;
+  -webkit-transition: width 125ms ease, opacity 200ms ease;
+  transition: width 125ms ease, opacity 200ms ease;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.tabs li.current:after {
+  opacity: 1;
+  width: 100%;
+}
+
+ul.tabs li.current {
+  font-weight: 600;
+  color:#45c;
+}
+.tab-content {
+  display: none;
+    
+}
+.tab-content.current {
+  display: inherit;
+}
+
+@media screen and (max-width: 600px) {
+  .table {
+    border: 0;
+  }
+
+  .table caption {
+    font-size: 1.3em;
+  }
+  
+  .table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  .table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  .table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+.ebcf_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.ebcf_modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 45%;
+    margin-left:30%;
+}
+
+/* The Close Button */
+.ebcf_close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.ebcf_close:hover,
+.ebcf_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+ .input-group{
+     display:none;
+ }   
+    
+}
+
+
+
+@media screen and (max-width: 800px) {
+
+.ebcf_modal-content{
+   margin-top: 20%;
+    width: 96%;
+    margin-left: 2%;
+}
+
+}
+
+.form{
+ 
+    width: 90%;
+    height:10vh;
+    padding: .75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #16192c;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e7eaf0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    
+}
+
+nav ul li a {
+	display: block;
+	padding: 10px 15px;
+	color: #333;
+	text-decoration: none;
+	-webkit-transition: 0.2s linear;
+	-moz-transition: 0.2s linear;
+	-ms-transition: 0.2s linear;
+	-o-transition: 0.2s linear;
+	transition: 0.2s linear;
+}
+nav ul li a:hover {
+	background: #f8f8f8;
+	color: #515151;
+}
+nav ul li a .fa {
+	width: 16px;
+	text-align: center;
+	margin-right: 5px;
+	float:right;
+}
+
+
+nav ul li ul li a:hover {
+	background: #e7eaf0;
+	border-left: 4px solid #ddd;
+}
+</style>
+<body>
+    
+	<!-- Banner -->
+
+
+<!-- Dashboard -->
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Vertical Navbar -->
+    <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Brand -->
+            <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                   <img src="{% static '/image/krish logo.PNG'%}" alt="..." style="height:110px;">
+            </a>
+            <!-- User menu (mobile) -->
+            <div class="navbar-user d-lg-none">
+                <!-- Dropdown -->
+                <div class="dropdown">
+                    <!-- Toggle -->
+                    <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="avatar-parent-child">
+                           
+                        </div>
+                    </a>
+                    <!-- Menu -->
+                    
+                </div>
+            </div>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidebarCollapse">
+                <!-- Navigation -->
+                <ul class="navbar-nav">
+                    
+                  <li class='sub-menu' ><a href='#' style="color: #000;font-weight: 500;font-size: .875rem;">&nbsp;&nbsp;<i class="bi bi-bookmark-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Course Content
+                    <span class="arrow" style="font-size: 9px;margin-left: 30%;color:#aaaaaa;">&#9660;</span></a>
+                    <ul>
+                      <li><a href="{% url 'KTcontent' %}">KI-NETWORK</a></li>
+                        <li><a href="{% url 'ADAScontent' %}">ADAS</a></li>
+                        <li><a href="{% url 'PYTHONcontent' %}">PYTHON</a></li>
+                        <li><a href="{% url 'RPIcontent' %}">RPI</a></li>
+                        <li><a href="{% url 'NANOcontent' %}">JETSONNANO</a></li>
+                        <li><a href="{% url 'AIcontent' %}">AI</a></li>
+                        <li><a href="{% url 'DScontent' %}">DS</a></li>
+                        
+                    </ul>
+                </li>
+                    
+                     
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="bi bi-box-arrow-left"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+                <!-- Divider -->
+                
+                <!-- Push content down -->
+                
+        </div>
+    </nav>
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 overflow-y-lg-auto" style="height:auto;">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight"> ADAS-ROVER(JETSONNANO)</h1>
+                        </div>
+                        
+                        <ul class="navbar-nav mr-lg-4 w-50">
+          <li class="nav-item nav-search d-none d-lg-block w-50">
+            <div class="input-group" style="margin-left: 85%;width:95%;">
+             
+              
+              <input type="text" class="form-control" placeholder="Search User" aria-label="search" aria-describedby="search" id='search-box'>
+            </div>
+          </li>
+        </ul>
+        
+                       
+                    </div>
+                    
+                    <br><br>
+                            
+                            
+                    <!-- Nav -->
+                    
+                </div>
+            </div>
+        </header>
+        <br>
+
+<button  class="btn btn-primary" id="mySizeChart" style="margin-right:4%;float:right;">&nbsp;+ Add Content</button>
+  
+
+<div id="mySizeChartModal" class="ebcf_modal">
+
+  <div class="ebcf_modal-content">
+    <span class="ebcf_close">&times;</span>
+    
+ 
+         <form action="" method="post">
+                      <div class="form-group">
+						<label for="name">Topic :</label><br>
+						<input type="text" name="topic" id="topic"   class="form" required class="form" />
+						
+					</div>
+					 <div class="form-group">
+						<label for="name">Content :</label><br>
+						<input type="text" name="content" id="content"   class="form" required class="form" />
+						
+					</div>
+				
+
+				<br>
+
+				
+ <div class="form-group">
+						<input type="submit" name="ok" value="Submit" class="btn btn-primary" />
+					</div>
+  
+</form>
+ </div>
+
+</div>
+	 
+	<main class="py-6 bg-surface-secondary">
+<br>
+
+
+
+
+
+
+
+
+<br>
+
+
+<table class="table table-bordered" id="example"  style="width:90%;margin-left:40px;justify-content: center;">
+  <thead >
+    <tr>
+      <th><span class="custom-checkbox">
+        <input type="checkbox" id="checkbox1" name="option[]" value="1">
+        <label for="checkbox1"></label></th>
+      <th scope="col">ID</th>
+      <th scope="col">HEADER</th>
+      <th scope="col">BODY</th>
+      <th scope="col">FOOTER</th>
+      <th scope="col">ACTION</th>
+      
+    </tr>
+  </thead>
+<tbody>
+              
+             <tr>
+                <th><span class="custom-checkbox">
+                <input type="checkbox" id="checkbox1" name="option[]" value="1">
+                <label for="checkbox1"></label></th>
+                <th>1.</th>
+                <th> image</th>
+                <th></th>
+                <th></th>
+                
+                  <th>
+                                 <a href="#" class="btn btn-info">
+                  Edit
+                  </a>
+                  <a href="#" class="btn btn-success">
+                    Add
+                    </a>
+                               
+                  <a ="#" class="btn btn-danger" data-toggle="modal"  >
+                 Delete
+                  </a>
+                </th>
+               
+                             
+             </tr>
+               
+            
+               </tbody>
+</table>
+        
+        </main>
+    </div>
+
+   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
+ 
+ <script>
+      // Get the modal
+var ebModal = document.getElementById('mySizeChartModal');
+
+// Get the button that opens the modal
+var ebBtn = document.getElementById("mySizeChart");
+
+// Get the <span> element that closes the modal
+var ebSpan = document.getElementsByClassName("ebcf_close")[0];
+
+// When the user clicks the button, open the modal 
+ebBtn.onclick = function() {
+    ebModal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+ebSpan.onclick = function() {
+    ebModal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == ebModal) {
+        ebModal.style.display = "none";
+    }
+}
+  </script>
+  
+  
+  
+  <script>
+  $(document).ready( function () {
+		$('.table').DataTable();
+  });
+  </script>
+  <script>
+      $('ul.tabs li').click(function() {
+  var tab_id = $(this).attr('data-tab');
+  $('ul.tabs li').removeClass('current');
+  $('.tab-content').removeClass('current');
+  $(this).addClass('current');
+  $("#" + tab_id).addClass('current');
+})
+  </script>
+   <script>
+      (function () {
+    var showResults;
+    $('#search-box').keyup(function () {
+        var searchText;
+        searchText = $('#search-box').val();
+        return showResults(searchText);
+    });
+    showResults = function (searchText) {
+        $('tbody tr').hide();
+        return $('tbody tr:Contains(' + searchText + ')').show();
+    };
+    jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function (arg) {
+        return function (elem) {
+            return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+}.call(this));
+  </script>
+  <script>
+    $('.sub-menu ul').hide();
+  $(".sub-menu a").click(function () {
+    $(this).parent(".sub-menu").children("ul").slideToggle("100");
+    $(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
+  });
+  </script>
+</body>
+</html>

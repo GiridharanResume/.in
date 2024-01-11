@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRISHTEC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style-subadmin.css'%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+</head>
+<style>
+        /* The Modal (background) */
+        .ebcf_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.ebcf_modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 45%;
+    margin-left:28%;
+    margin-top: 16%;
+}
+
+/* The Close Button */
+.ebcf_close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.ebcf_close:hover,
+.ebcf_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+ .input-group{
+     display:none;
+     
+ }   
+ .ebcf_modal-content{
+    width: 80%;
+    margin-left: 10%;
+ } 
+}
+
+.form-control{
+    background-color: #fff;
+    border: 1px solid #ddd;
+    height: 6vh;
+}
+</style>
+<body>
+    <div class="wrapper">
+        <aside id="sidebar" class="js-sidebar">
+            <!-- Content For Sidebar -->
+            <div class="h-100">
+                <div class="sidebar-logo">
+                  <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                    <img src="{% static '/image/krish logo.PNG'%}" alt="..." style="height:110px;">
+             </a>
+                </div>
+                <br>
+                <ul class="sidebar-nav">
+                    
+                    <li class="sidebar-item">
+                        <a href="{% url 'subadminmain' %}" class="sidebar-link">
+                            <i class="fa fa-university"></i>&nbsp;&nbsp;
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
+                            aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                            Course Content
+                        </a>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                          {% for x in course %}
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">{{ x.name }}</a>
+                            </li>
+                            {% endfor %}
+                    </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
+                            aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
+                            Course 
+                        </a>
+                        <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"> 1</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"> 2</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"> 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="sidebar-item">
+                        <a href="{% url 'login' %}" class="sidebar-link">
+                            <i class="fa fa-mail-reply"></i>&nbsp;&nbsp;
+                            Logout
+                        </a>
+                    </li>
+                    
+                    
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom" style="background-color: cadetblue;height: 8vh;">
+                <button class="btn" id="sidebar-toggle" type="button" style="border: 1px solid #ddd;">
+                    <span class="navbar-toggler-icon" style="color: #fff;"></span>
+                </button>
+            
+            </nav>
+
+            
+          
+                
+                    <!-- Table Element -->
+                    <div class="main-content" style="background-color:#e7eaec ;height:92vh ;padding: 35px;">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="table-wrapper">
+                            
+                          
+                          
+                            <div class="table-title">
+                                <div class="row">
+                                  <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
+                                   <h2 class="ml-lg-2" style="color: #fff;">Edit Content :</h2>
+                                </div>
+                                <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
+                                    <div class="container mt-3">
+                                        
+                                        <a href="#" id="mySizeChart" class="btn btn-success">Add Course</a>
+                                      </div>
+                                   
+                                      
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <table class="table table-striped table-hover">
+                                 <thead>
+                                  <tr>
+                                <th><span class="custom-checkbox">
+                                <input type="checkbox" id="selectAll">
+                                <label for="selectAll"></label></th>
+                                <th>No</th>
+                                <th>Course</th>
+                                <th>Overview</th>
+                                              <th>Action</th>
+                                           
+                                             
+                                </tr>
+                               </thead>
+                               
+                               <tbody>
+                                {% for x in course %}
+                                   <tr>
+                                <th><span class="custom-checkbox">
+                                <input type="checkbox" id="checkbox1" name="option[]" value="1">
+                                <label for="checkbox1"></label></th>
+                                <th style="color: #000;">{{ forloop.counter }}.</th>
+                                <th style="color: #000;">{{ x.name }}</th>
+                                <th style="color: #000;">{{ x.description }}</th>
+                                
+                                  <th>
+                                                 <a href="{% url 'Editcontent' %}" class="btn btn-primary">
+                                  Edit
+                                  </a>
+                                  <a href="" class="btn btn-secondary">
+                                    Add
+                                      </a>
+                                               
+                                  <a onclick="" class="btn btn-danger" data-toggle="modal">
+                                 Delete
+                                  </a>
+                                </th>
+                                
+                                             
+                             </tr>
+                             
+                               
+                             {% endfor %}   
+                               </tbody>
+                               
+                                 
+                              </table>
+                              
+                              <div class="clearfix">
+                                
+                                <ul class="pagination">
+                                 <li class="page-item disabled"><a href="#">Previous</a></li>
+                               <li class="page-item active"><a href="#"class="page-link">1</a></li>
+                               <li class="page-item "><a href="#"class="page-link">2</a></li>
+                               <li class="page-item "><a href="#"class="page-link">3</a></li>
+                               
+                               <li class="page-item "><a href="#" class="page-link">Next</a></li>
+                              </ul>
+                              </div>
+                              
+                              
+                              
+                              
+                   
+                              
+                              
+                              
+                              
+                              </div>
+                           </div>
+                           
+                           
+                                     
+                              
+                              
+                              
+                            
+                              
+                              
+                           
+                              
+                           
+                           
+                          
+                            </div>
+                         </div>
+
+               
+            <a href="#" class="theme-toggle">
+                
+            </a>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-6 text-start">
+                            <p class="mb-0"><br>
+                                <a href="#" class="text-muted">
+                                  <img src="{% static '/image/krish logo.PNG'%}" style="width: 4%;">&nbsp;&nbsp;KRISHTEC
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <br>
+                                    <span >&copy; 2023 All Rights Reserved.</span>
+                               
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="mySizeChartModal" class="ebcf_modal">
+
+        <div class="ebcf_modal-content">
+          <span class="ebcf_close">&times;</span>
+          
+       
+          <form action="" method="post">
+              {% csrf_token %}
+              <br>
+                           <div class="form-group">
+          
+                              <label for="name">Course Name :</label>
+                              <input type="text" name="name" id="name"   class="form-control" required class="form-control" >
+                              
+                              <label for="name">Description :</label>
+                              <input type="text" name="description" id="description"   class="form-control" required class="form-control" >
+                              
+                          </div>
+                          
+                        <br>
+                          
+                           <div class="form-group">
+                              <input type="submit" name="subadmin" value="Submit" class="btn btn-primary" />
+                          </div>
+        
+      </form>
+       </div>
+      
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+ <script>
+    // Get the modal
+var ebModal = document.getElementById('mySizeChartModal');
+
+// Get the button that opens the modal
+var ebBtn = document.getElementById("mySizeChart");
+
+// Get the <span> element that closes the modal
+var ebSpan = document.getElementsByClassName("ebcf_close")[0];
+
+// When the user clicks the button, open the modal 
+ebBtn.onclick = function() {
+  ebModal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+ebSpan.onclick = function() {
+  ebModal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == ebModal) {
+      ebModal.style.display = "none";
+  }
+}
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script-subadmin.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

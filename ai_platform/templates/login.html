@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>KRISHTEC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css'%}">
+	
+
+	</head>
+
+	<body style="background: url(https://images.unsplash.com/32/Mc8kW4x9Q3aRR3RkP5Im_IMG_4417.jpg?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTZ8fGJhY2tncm91bmQlMjBpbWFnZXxlbnwwfHx8fDE3MDQ2MzQ5NjZ8MA&ixlib=rb-4.0.3);">
+		
+	<section class="ftco-section" style="margin-top: 7%;">
+		<div class="container">
+			<div class="row justify-content-center">
+				
+					
+				</div>
+			</div>
+			
+			<div class="row justify-content-center">
+				
+				<div class="col-md-4 col-lg-5">
+					
+					<div class="wrap d-md-flex">
+						
+						<div class="login-wrap p-4 p-md-6">
+							<div class="image-holder">
+								
+							</div>
+			      	<div class="d-flex">
+						
+			      		<div class="w-100">
+							
+			      			<h4>Sign In</h4>
+			      		</div>
+								
+			      	</div><br>
+                      <form action="" method="post">
+                                {% csrf_token %}
+			      		<div class="form-group mb-3">
+			      			<label class="label" >Username :</label>
+			      			<input type="name" class="form-control" id="name" placeholder="Enter name" name="name" required>
+			      		</div>
+						
+		            <div class="form-group mb-3">
+		            	<label class="label" >Password :</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required >
+		            </div>
+
+					
+
+					<div class="form-group mb-3">
+						<label class="label">User :</label>
+						 <select  name="user_type" id="user_type" class="form-control" />
+						 <option >--- Select Type ---</option>
+						 <option value="user">User</option>
+						 <option value="admin">Admin</option>
+						 <option value="subadmin">Staff</option>
+						  
+						</select>
+								</div>
+		            <div class="form-group mb-2">
+		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3" formaction="{% url 'subadminhome' %}">Sign In</button>
+		            </div>
+		            <div class="col-12" >
+						<a href="{% url 'Forgetpassword' %}" style="color: #007bff;">Forget Password</a>
+					</div>
+									
+		         
+		          </form>
+		         
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+	<script src="{% static 'js/boostrap-min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+  
+
+	</body>
+</html>
+

@@ -1,0 +1,908 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>KRISHTEC</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="{% static '/css/sample.css'%}">
+      
+      <!--GOOGLE FONTS-->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;400;500;600;700;800;900&family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+      
+      <!--PLUGIN-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+	 
+	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      
+      <style>
+        .btn{
+			background-color: #15680e;
+          color: white;
+          border: #15680e;
+        }
+
+        .btn:hover{
+			background-color: #15680e;
+			color: #fff;
+		}
+
+
+
+
+
+
+.navbar-nav {
+	display: flex;
+	list-style: none;
+	.nav-link {
+		padding: 5px;
+		text-decoration: none;
+		font-size: 0.9em;
+		font-weight: 400;
+		display: block;
+		transition: 150ms ease;
+	}
+	.nav-item {
+		margin: 0 10px;
+		position: relative;
+	}
+	> .nav-item {
+		&:after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			background: $primary;
+			bottom: -16px;
+			transition: 400ms ease;
+			transform: scaleX(1.5);
+			opacity: 0;
+            margin-top: 10%;
+		}
+		&:hover:after {
+			transform: scaleX(1);
+			opacity: 1;
+		}
+	}
+}
+
+
+
+/* Dropdown CSS */
+.nav-item {
+	.dropdown {
+		width: auto;
+		display: block;
+		position: absolute;
+		top: 35px;
+		transition: 300ms;
+		padding: 10px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(5px);
+		border-top: 1px solid rgba(0, 0, 0, 0.15);
+		background: #fff;
+		border-radius: 4px;
+		z-index: 999;
+		box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.15);
+		.nav-link {
+			color: $default;
+		}
+		.dropdown {
+			top: 0;
+			left: calc(100% + 20px);
+			border-top: 0;
+			border-left: 1px solid rgba(0, 0, 0, 0.15);
+			&:before {
+				top: 10px;
+				left: -10px;
+				border: 5px solid transparent;
+				border-right-color: #000;
+			}
+		}
+		&:before {
+			content: "";
+			position: absolute;
+			top: -10px;
+			left: 10px;
+			border: 5px solid transparent;
+			border-bottom-color: #000;
+			display: none;
+		}
+		.nav-item:not(:last-child) {
+			margin-bottom: 5px;
+		}
+		> .nav-item:hover > .nav-link {
+			color: $primary;
+		}
+	}
+	&:hover > .dropdown {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0px);
+	}
+	&:hover > a::before {
+		transform: rotate(90deg);
+	}
+}
+
+
+.nav-item.icon {
+	> a:before {
+		content: "";
+		position: absolute;
+		right: -10px;
+		top: calc(50% + 0px);
+		transform: translateY(-50%);
+		border: 4px solid transparent;
+		border-left-color: inherit;
+		transition: 0.15s linear;
+	}
+	&:hover > a::before {
+		transform: rotate(90deg);
+	}
+}
+
+/* Responsive (navbar alignments options) */
+@media (min-width: 992px) {
+	.navbar-brand,
+	.navbar-utils {
+		flex: auto;
+	}
+	.navbar-nav {
+		flex: 2;
+		justify-content: center;
+	}
+	.navbar-utils {
+		text-align: right;
+	}
+
+	.navbar-right {
+		.navbar-brand,
+		.navbar-utils {
+			flex: initial;
+		}
+		.navbar-nav {
+			justify-content: flex-end;
+			margin-right: 20px;
+		}
+	}
+
+	.navbar-left {
+		.navbar-nav {
+			order: 1;
+			justify-content: flex-start;
+		}
+		.navbar-brand {
+			order: 2;
+		}
+		.navbar-utils {
+			order: 3;
+		}
+	}
+
+	.navbar-right {
+		.dropdown .dropdown {
+			left: unset;
+			right: calc(100% + 20px);
+			border-top: 0;
+			border-right: 1px solid rgba(0, 0, 0, 0.15);
+		}
+	}
+}
+
+/* Nav Option (Logo Center) */
+@media (min-width: 992px) {
+	.navbar-left {
+		.navbar-brand {
+			text-align: right;
+		}
+		.navbar-toggler {
+			display: block;
+			margin-right: 0;
+		}
+
+		.navbar-nav {
+			background: #ffffff;
+			flex-direction: column;
+			z-index: 99999;
+			padding: 0 20px;
+			opacity: 0;
+			transition: 400ms ease;
+
+			/* Sidebar */
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 300px;
+			height: 100%;
+			overflow-y: auto;
+			box-shadow: 0px 0px 0 2000px rgba(#000, 0.5);
+			transform: translateX(-300px);
+
+			.nav-link {
+				margin: 10px 0;
+				color: $default;
+				display: flex;
+				align-items: center;
+			}
+			> .nav-item {
+				&:first-child {
+					margin-top: 20px;
+				}
+				&:last-child {
+					margin-bottom: 20px;
+				}
+			}
+			.nav-item {
+				&:not(:last-child) {
+					border-bottom: 1px solid rgba(#000, 0.1);
+				}
+				&:hover > .nav-link {
+					color: $primary;
+				}
+			}
+			> .nav-item:after {
+				display: none;
+			}
+
+			.nav-close {
+				display: block;
+			}
+		}
+		.navbar-nav.active {
+			max-height: initial;
+			opacity: 1;
+			transform: translateX(0);
+			left: 0;
+			box-shadow: 0 0 0 10000px rgb(0 0 0 / 50%);
+		}
+		.nav-item {
+			.dropdown {
+				padding: 0;
+				position: initial;
+				max-height: 0;
+				width: auto;
+				border: none;
+				box-shadow: none;
+				.dropdown {
+					border: none;
+				}
+
+				&:before {
+					display: none;
+				}
+			}
+			&:hover > .dropdown {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0px);
+				max-height: initial;
+			}
+		}
+		.nav-item.icon a:before {
+			top: unset;
+			right: 0;
+		}
+	}
+}
+
+/* Responsive navbar */
+@media (max-width: 991px) {
+	.navbar-toggler {
+		display: block;
+	}
+	.navbar-nav {
+		background: #ffffff;
+		flex-direction: column;
+		z-index: 99999;
+		padding: 0 20px;
+		opacity: 0;
+		transition: 400ms ease;
+
+		/* Sidebar */
+		position: fixed;
+		left: -300px;
+		top: 10;
+		width: 300px;
+		height: 100%;
+		overflow-y: auto;
+		// box-shadow: 0px 0px 0 2000px rgba(#000, 0.5);
+		transform: translateX(-300px);
+
+		.nav-link {
+			margin: 10px 0;
+			color: $default;
+			display: flex;
+			align-items: center;
+		}
+		> .nav-item {
+			&:first-child {
+				margin-top: 20px;
+			}
+			&:last-child {
+				margin-bottom: 20px;
+			}
+		}
+		.nav-item {
+			&:not(:last-child) {
+				border-bottom: 1px solid rgba(#000, 0.1);
+			}
+			&:hover > .nav-link {
+				color: $primary;
+			}
+		}
+		> .nav-item:after {
+			display: none;
+		}
+
+		.nav-close {
+			display: block;
+		}
+	}
+	.navbar-nav.active {
+		max-height: initial;
+		opacity: 1;
+		transform: translateX(0);
+		left: 0;
+		box-shadow: 0px 0px 0 10000px rgba(#000, 0.5);
+	}
+	.nav-item {
+		.dropdown {
+			padding: 0;
+			position: initial;
+			max-height: 0;
+			width: initial;
+			border: none;
+			box-shadow: none;
+			.dropdown {
+				border: none;
+			}
+
+			&:before {
+				display: none;
+			}
+		}
+		&:hover > .dropdown {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0px);
+			max-height: initial;
+		}
+	}
+	.nav-item.icon a:before {
+		top: unset;
+		right: 0;
+		transform: translateY(0px);
+	}
+}
+
+/* Search Popup */
+.search-popup {
+	opacity: 0;
+	visibility: hidden;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+	display: grid;
+	place-items: center;
+	box-shadow: inset 0 0 0 1000px rgba(#000, 0.5);
+	transition: 200ms;
+	&.active {
+		opacity: 1;
+		visibility: visible;
+		form {
+			transform: translateY(0px);
+		}
+	}
+	form {
+		position: absolute;
+		background: #fff;
+		width: 500px;
+		height: 200px;
+		display: grid;
+		place-items: center;
+		padding: 30px;
+		border-radius: 6px;
+		box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.2);
+		transition: 300ms;
+		transform: translateY(20px);
+	}
+
+	.btn-search-close {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		background: transparent;
+		border: 0;
+		outline: 0;
+		font-size: 3rem;
+		cursor: pointer;
+		width: 30px;
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.close-btn {
+			transform: rotate(45deg);
+		}
+	}
+
+	input[type="search"] {
+		width: 100%;
+		height: 70px;
+		border: none;
+		outline: none;
+		border: 1px solid #cccccc;
+		border-radius: 4px;
+		font-size: 2rem;
+		font-weight: 300;
+		padding: 0px 10px;
+		transition: 100ms;
+		&:focus {
+			box-shadow: 0 0 0 3px rgba(0, 129, 255, 0.43);
+			border-color: transparent;
+		}
+		&::-webkit-input-placeholder {
+			color: #b3b3b3;
+		}
+	}
+}
+
+@media (max-width: 576px) {
+	.search-popup {
+		form {
+			width: calc(100% - 30px);
+			height: 170px;
+			padding: 15px;
+		}
+	}
+}
+
+
+      </style>
+
+      
+      
+      
+      <!--TOP MENU-->
+      <menu class="top_menu flex">
+          <section class="flex_content">
+              <a href="emailto:info@lilliovi.com">
+                  <i class="fa fa-envelope-o"></i>
+                  example@gmail.com
+              </a>
+              <a href="tel:1234567890">
+                  <i class="fa fa-phone"></i>
+                  1234567890
+              </a>
+          </section>
+          <section class="flex_content">
+              <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+             
+          </section>
+      </menu>
+      
+      <!--NAV-->
+      <nav>
+          <section class="flex_content">
+              <figure class="logo fixed_flex">
+                  <img src="https://media.licdn.com/dms/image/D5603AQGCZPbgaMCTng/profile-displayphoto-shrink_800_800/0/1688798338972?e=2147483647&v=beta&t=isnsK67W-Q6doLfj6hxBxC5pofZdPfB6qQ3NJCjMivc" alt="">
+                 
+              </figure>
+          </section>
+          <section class="flex_content nav_content" id="nav_content" style="display:contents;  color: #525252;">
+              
+              
+              
+             
+               
+                    
+                    <a href="{% url 'userhome' %}" style="font-family: mukta,sans-serif;">Home</a>
+                    <ul class="navbar-nav">
+                        
+                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" style="font-family: mukta,sans-serif;">Course <i class="bi bi-chevron-down"></i></a>
+                            <ul class="dropdown">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">KT-NETWORK <span style="margin-left: 100%;"><i class="bi bi-chevron-right"></i></span></a>
+                                    <ul class="dropdown">
+                                        <li >
+                                            <a href="#" class="nav-link">LAN KIT</a>
+                                        </li>
+                                       
+                                    </ul>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">ADAS-(C++)<span style="margin-left: 140%;"><i class="bi bi-chevron-right"></i></span></a>
+                                    <ul class="dropdown">
+                                        <li >
+                                            <a href="#" class="nav-link">RADAR</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">ADAS-(PYTHON) <span style="margin-left: 75%;"><i class="bi bi-chevron-right"></i></span></a>
+                                    <ul class="dropdown">
+                                        <li>
+                                            <a href="#" class="nav-link">LIDAR</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link">TRAFFIC-(SIGN-DETECTION)</a>
+                                        </li>
+                                       
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">ADAS-ROVER(RPI)<span style="margin-left: 70%;"><i class="bi bi-chevron-right"></i></span></a>
+                                    <ul class="dropdown">
+                                        <li>
+                                            <a href="#" class="nav-link">INSTALL TENSORFLOW</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link">AUTONOMOUS RASPBERRY PI ROVER</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link"> BLYNK SEND AND RECEIVE DATA</a>
+                                            
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">CLOUD CONTROLLED RASPBERRY PI ROVER</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link"> ACCESS WEB CAM USING CAMERA-LIVE</a>
+                                            
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">VIDEO-CAPTURE</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">IMAGES FROM VIDEO </a>
+                                            
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">IMAGE-LABELLING</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link"> XML DATA TO CSV</a>
+                                            
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">AI MODEL TRAINING AND DETECTION  </a>
+                                            
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">TRAFFIC-SIGN CONTROLLED RASPBERRY PI ROVER</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link"> ULTRASONIC CONTROLLED RASPBERRY PI ROVER</a>
+                                            
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link"> LIDAR CONTROLLED RASPBERRY PI ROVER</a>
+                                            
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">ADAS-ROVER(JETSON NANO)<span style="margin-left: 8%;"><i class="bi bi-chevron-right"></i></span></a>
+                                    <ul class="dropdown" style="width: auto;">
+                                        <li>
+                                            <a href="#" class="nav-link">AUTONOMOUS JETSON NANO ROVER</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">CLOUD CONTROLLED JETSON NANO ROVER</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">LIDAR CONTROLLED JETSON NANO ROVER </a>
+                                            
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link">TRAFFIC-SIGN CONTROLLED JETSON NANO ROVER</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link">ULTRASONIC CONTROLLED JETSON NANO ROVER </a>
+                                            
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">ARTIFICIAL INTELLIGENCE<span style="margin-left: 20%;"><i class="bi bi-chevron-right"></i></span></a>
+                                    <ul class="dropdown">
+                                        <li >
+                                            <a href="#" class="nav-link">OBJECT-DETECTION</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link">FACE- RECOGNITION</a>
+                                        </li>
+                                        <li >
+                                            <a href="#" class="nav-link"> FRUIT- RECOGNITION</a>
+                                            
+                                        </li>
+                                    </ul>
+                                </li>
+
+                               
+                                    </ul>
+                                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+                            </ul>
+                        </li>
+                    
+                        
+                        
+                    </ul>
+                    <a href="#entroll" style="font-family: mukta,sans-serif;">Enroll</a>
+					<a href="{% url 'Mentor' %}" style="font-family: mukta,sans-serif;">Trainer</a>
+                    
+               
+         
+            
+              
+             
+              
+          </section>
+    
+  
+
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKv3IsO-TLKwMQvP614O8qJFNDyHlyULwZcw&usqp=CAU" class="user-logo"  onclick="toggleMenu()">
+  <i class="bi bi-circle-fill" style="margin-top: 20px;margin-left: -5px;color: #15680e;font-size: 7px;"></i>
+
+  <div class="sub-menu-wrap" id="subMenu">
+    <div class="sub-menu">
+      <div class="user-info">
+        
+        
+        <h5>{{name}}</h5>
+       
+      </div>
+     
+     <hr>
+
+
+     <a href="{% url 'profile' %}" class="sub-menu-link" style="margin: -28px;">
+      
+    <p style="font-family: 'Mukta';margin-left: 67%;">Edit Profile</p>
+    
+    </a> 
+
+    <a href="{% url 'mycourse' %}" class="sub-menu-link">
+      
+      <p style="font-family: 'Mukta';">My Course</p>
+    
+      </a> 
+
+      <a href="{% url 'login' %}" class="sub-menu-link">
+      
+        <p style="font-family: 'Mukta';">Logout</p>
+       
+        </a> 
+
+        
+
+      
+      
+
+
+    </div>
+  </div>
+ </nav>
+
+ <body>
+ <div class="main" style="background-color: whitesmoke;height: 100vh;margin-top: 7%;">
+    <div class="container">
+      
+
+      <div class="row" >
+       
+		{% for x in Mentor %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card mb-5 shadow-sm">
+            <img class="card-img-top" src="https://img.freepik.com/premium-photo/fitness-trainer-digital-avatar-generative-ai_934475-9346.jpg" alt="Card image cap" style="width: 100%;height: 30vh;">
+
+            <div class="card-body">
+              <div class="card-title">
+                <h5 class="card-title" style="font-size: 17px;">{{ x.name }}</h5>
+              </div>
+              <div class="card-text">
+                <p>
+					{{ x.position }}
+                </p>
+              </div>
+              <a href="#" class="btn btn-outline-primary rounded-0 float-end"
+                >Read More</a
+              >
+            </div>
+          </div>
+        </div>
+		{% endfor %}
+
+
+        
+      </div>
+    </div>
+
+          
+
+
+	
+  
+</div>
+
+
+		  
+		  
+		  
+          
+      
+          
+          <script>
+
+            
+var element;
+
+
+if (window.matchMedia("(max-width: 920px)").matches === false) {
+    $(".ham").on("click", function(){
+        $(".side_menu").css("right", "0px");
+        $(".overlay").css("opacity","1");
+        $(".overlay").css("z-index","99");
+    });
+
+    $(".close").on("click", function(){
+        $(".contact").css("top") >= "10%" ? $(".contact").hide().css("top","-100%").fadeOut('100') : $(".side_menu").css("right", "-500px");
+        $(".overlay").css("opacity","0");
+        $(".overlay").css("z-index","-1");
+    });
+
+    $(".overlay").on("click", function(){
+        $(".contact").css("top") >= "10%" ? $(".contact").hide().css("top","-100%").fadeOut('100') : $(".side_menu").css("right", "-500px");
+        $(".overlay").css("opacity","0");
+        $(".overlay").css("z-index","-1");
+    });
+} else {
+    $(".ham").on("click", function(){
+        $(".side_menu").css("right", "0px");
+        $(".overlay").css("opacity","1");
+        $(".overlay").css("z-index","9");
+    });
+    
+    $(".close").on("click", function(){
+        $(".contact").css("top") >= "10%" ? $(".contact").hide().css("top","-100%").fadeOut('100') : $(".side_menu").css("right", "-120%");
+        $(".overlay").css("opacity","0");
+        $(".overlay").css("z-index","-1");
+    });
+    
+    $(".overlay").on("click", function(){
+        $(".contact").css("top") >= "10%" ? $(".contact").hide().css("top","-100%").fadeOut('100') : $(".side_menu").css("right", "-120%");
+        $(".overlay").css("opacity","0");
+        $(".overlay").css("z-index","-1");
+    });
+}
+
+
+//Scroller Nav
+window.onscroll = function() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        $("nav").addClass("fixed_nav");
+    } else {
+        $("nav").removeClass("fixed_nav");
+    }
+}
+
+
+//DETECT ESC KEY PRESSED
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc");
+    } else {
+        isEscape = (evt.keyCode === 27);
+    }
+    if (isEscape) {
+        if ($(".overlay").css("opacity") == "1"){
+            $(".contact").css("top") >= "10%" ? $(".contact").hide().css("top","-100%").fadeOut('100') : $(".side_menu").css("right", "-120%");
+            $(".overlay").css("opacity","0");
+            $(".overlay").css("z-index","-1");
+        }
+    }
+};
+
+
+
+//Dropdown
+$(".dropdown").click(function(){
+    if ($(this).children("aside").is(":hidden")){
+        $(this).children("aside").show("slow");
+        $(this).children("a").css("color","var(--white)");
+    } else {
+        $(this).children("aside").hide("slow");
+        $(this).children("a").css("color","var(--lite)");
+    }
+});
+
+
+
+
+
+
+
+
+//Global variables
+var slidestoshow, arrowmark;
+if (window.matchMedia("(max-width: 920px)").matches === false) {
+    slidestoshow = 4;
+    arrowmark = true;
+} else {
+    slidestoshow = 1;
+    arrowmark = false;
+}
+
+$('.blog-slider').slick({
+    slidesToShow: slidestoshow,
+    slidesToScroll: 1,
+    dots: false,
+    arrows: arrowmark,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    infinite: true
+});
+
+
+$('.event-slider').slick({
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	dots: false,
+	arrows: false,
+	autoplay: true,
+	autoplaySpeed: 4000,
+	infinite: true
+});
+          </script>
+
+
+<script>
+     let subMenu = document.getElementById("subMenu");
+
+     function toggleMenu(){
+          subMenu.classList.toggle("open-menu");
+  }
+
+</script>
+     
+      </body>
+      
+     
+     </html>
