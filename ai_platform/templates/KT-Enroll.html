@@ -866,8 +866,13 @@ h1 {
 	  ✓  Robot Collision<br>
 	  ✓  Blind man stick for collision prevention<br>
 	
-	
-	  <a href="{% url 'KTHomepage' %}"><button class="button">ENROLL</button></a>
+
+	  <br>
+	  <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#myModal" style="color: #fff;margin-left: 35%;text-align: center;" >
+		ENTROLL
+	  </button>
+
+	  
 	  
 	</p>
 	  <br>
@@ -878,6 +883,74 @@ h1 {
 
   
 
+	<div class="container mt-3">
+		
+  
+		<div class="modal" id="myModal">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+		
+			  <!-- Modal Header -->
+			  <div class="modal-header">
+				<h4 class="modal-title">Entroll Form</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			  </div>
+		
+			  <!-- Modal body -->
+			  <div class="modal-body">
+				
+				<form  action="" method='post' >
+					{% csrf_token %}
+
+					<div class="mb-2 mt-2">
+						<label for="name" class="form-label">Name:</label>
+						<input type="name" class="form-control" id="name"  name="name"   required>
+					  </div>
+					
+			
+					
+					<div class="mb-3 mt-3">
+						<label for="email" class="form-label">Email:</label>
+					  <input type="text" name="email" id="email" class="form-control"  required >
+					</div>
+					
+					<div class="mb-3 mt-3">
+						<label for="password" class="form-label">Password:</label>
+					  <input type="text" name="password" id="password" class="form-control"  autocomplete="off" required>
+					</div>
+				   <div class="mb-3 mt-3">
+					<label for="college" class="form-label">College Name:</label>
+					  <input type="text" name="college" id="college" class="form-control"  required>
+					</div>
+					<div class="mb-3 mt-3">
+						<label for="phoneno" class="form-label">Phone Number:</label>
+					  <input type="text" name="phoneno" id="phoneno" class="form-control"  required>
+					</div>
+					
+					 <div class="mb-3 mt-3">
+						<label for="date" class="form-label">Date :</label>
+					  <input type="date" name="date" id="date" class="form-control"  autocomplete="off" required>
+					</div>
+					
+					 
+					
+				   
+					
+				</form>
+			  </div>
+		
+			  <!-- Modal footer -->
+			  <div class="modal-footer" >
+			
+					<button class="btn btn-primary" type="submit"  value="Submit" formaction="{% url 'Add_Enroll' %}" style="color: #fff;"> Save </button>
+				
+				  
+				
+			  </div>
+		
+			</div>
+		  </div>
+		</div>
 
       <script>
         const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");

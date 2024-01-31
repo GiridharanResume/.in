@@ -137,13 +137,10 @@
                             </span>
                         </button>
                     </div>
-                    <form  method='POST' >
+                    <form  method='POST' action="{% url 'Edit-Mentor'  %}" enctype="multipart/form-data" >
                         {% csrf_token %}
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Image :</label>
-                            <input class="form-control" type="file" id="image" accept=".jpg, .png, .jpeg" value="" name="image">
-                          </div> 
+                        
                           
                           
                           <div class="mb-3">
@@ -156,7 +153,10 @@
                             <input type="text" class="form-control" id="position" name="position">
                           
                           </div>
-                          
+                          <div class="mb-3">
+                            <label for="image" class="form-label">Image :</label>
+                            <input class="form-control" type="file" id="image"   name="image">
+                          </div> 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
@@ -173,33 +173,34 @@
         
            </div>
 
-           <div class="table">
+           <div class="table" >
            <table class="table table-bordered">
             <thead style="font-weight: bold;font-size: 16px;">
              <tr>
         
            <th>No</th>
-           <th>Image</th>
            <th>Name</th>
           <th>Position</th>
-                      
+          <th>Image</th>      
                         
            </tr>
           </thead>
           
           <tbody>
-            {% for x in Mentor %}
+            {% for p in Mentor %}
               <tr>
            
            <th>{{ forloop.counter }}.</th>
-           <th><img src="{% static '/image/krish logo.PNG'%}"></th>
-           <th>{{ x.name }}</th>
-           <th>{{ x.position }}</th>
-             
-           
-                        
+           <th>{{ p.name }}</th>
+           <th>{{ p.position }}</th>
+             {% if p.image %}
+           <th> <img src="{{p.image.url}}" alt="" ></th>
+
+              {% else %}     
+                
+              {% endif %}
         </tr>
-        
+      
           
         {% endfor %}   
           </tbody>
